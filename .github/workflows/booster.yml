@@ -1,0 +1,30 @@
+name: boost
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Version tag name'
+        required: true
+        default: '8.0.0'
+      pwd_val:
+        description: 'Docker PWD'
+        required: true
+        default: ''
+
+jobs:
+  build:
+    name: Build Jar
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Boost Image Search
+        run: docker pull docker.elastic.co/elasticsearch/elasticsearch:${{ github.event.inputs.tag_name }}
+        
+      - name: Boost Image Kibana
+        run: docker pull docker.elastic.co/kibana/kibana:${{ github.event.inputs.tag_name }}
+
+      - name: Boost Image Logstash
+        run: docker pull docker.elastic.co/logstash/logstash:${{ github.event.inputs.tag_name }}
+
+      - name: Check Image
+        run: docker images -a
