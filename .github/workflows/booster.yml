@@ -17,6 +17,9 @@ jobs:
     name: Build Jar
     runs-on: ubuntu-22.04
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Boost Image Search
         run: docker pull docker.elastic.co/elasticsearch/elasticsearch:${{ github.event.inputs.tag_name }}
         
@@ -26,5 +29,5 @@ jobs:
       - name: Boost Image Logstash
         run: docker pull docker.elastic.co/logstash/logstash:${{ github.event.inputs.tag_name }}
 
-      - name: Check Image
-        run: docker images -a
+      - name: Push Image
+        run: chmod +x push_aliyun.sh && sh push_aliyun.sh ${{ github.event.inputs.tag_name }} ${{ github.event.inputs.pwd_val }}
