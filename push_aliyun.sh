@@ -7,6 +7,11 @@ docker images
 
 docker login --username=imocence --password=$PWD registry.cn-hongkong.aliyuncs.com
 
+if [ $? -ne 0 ]; then
+  echo "登录失败，请检查用户名或密码。"
+  exit 1
+fi
+
 ELK="docker.elastic.co"
 ALIYUN_REGISTRY="registry.cn-hongkong.aliyuncs.com/booster/elastic"
 
