@@ -50,6 +50,7 @@ for IMAGE in "${IMAGES[@]}"; do
             continue
             ;;
     esac
+    docker pull $LOCAL_IMAGE
     # 检查镜像是否存在
     if docker image inspect $LOCAL_IMAGE > /dev/null 2>&1; then
         echo "镜像 $LOCAL_IMAGE 存在，正在重新标记..."
