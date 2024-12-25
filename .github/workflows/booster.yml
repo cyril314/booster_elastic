@@ -20,14 +20,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Boost Image Search
-        run: docker pull docker.elastic.co/elasticsearch/elasticsearch:${{ github.event.inputs.tag_name }}
-        
-      - name: Boost Image Kibana
-        run: docker pull docker.elastic.co/kibana/kibana:${{ github.event.inputs.tag_name }}
-
-      - name: Boost Image Logstash
-        run: docker pull docker.elastic.co/logstash/logstash:${{ github.event.inputs.tag_name }}
-
       - name: Push Image
         run: chmod +x push_aliyun.sh && bash push_aliyun.sh ${{ github.event.inputs.tag_name }} ${{ github.event.inputs.pwd_val }}
