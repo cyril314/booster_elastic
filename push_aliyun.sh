@@ -15,7 +15,7 @@ fi
 ELK="docker.elastic.co"
 ALIYUN_REGISTRY="registry.cn-hongkong.aliyuncs.com/booster/elastic"
 
-IMAGES=("elasticsearch" "kibana" "logstash" "elastic-agent" "filebeat" "heartbeat" "metricbeat")
+IMAGES=("elasticsearch" "kibana" "logstash" "elastic-agent" "filebeat" "heartbeat" "metricbeat" "enterprise-search")
 
 for IMAGE in "${IMAGES[@]}"; do
     LOCAL_IMAGE="$ELK/$IMAGE/$IMAGE:$TAG"  # 本地镜像名称
@@ -44,6 +44,10 @@ for IMAGE in "${IMAGES[@]}"; do
         "metricbeat")
             LOCAL_IMAGE="$ELK/beats/$IMAGE:$TAG"
             ALIYUN_IMAGE="$ALIYUN_REGISTRY:mb_$TAG"
+            ;;
+        "enterprise-search")
+            LOCAL_IMAGE="$ELK/$IMAGE/$IMAGE:$TAG"
+            ALIYUN_IMAGE="$ALIYUN_REGISTRY:es_$TAG"
             ;;
         *)
             echo "未知镜像: $IMAGE"
